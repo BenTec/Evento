@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<ui:composition template="/template/public.xhtml">
+	
+	<ui:define name="content">
+
+		<h:form id="recuperar">
+
+			<p:fieldset styleClass="field" id="campo" >
+				<p:focus/>
+				
+				<p:messages  closable="true" >
+					<p:effect event="load" type="pulsate" delay="400"></p:effect>
+				</p:messages>
+				
+				<h:panelGrid columns="1">
+					<h2>Enconte sua conta</h2>
+				</h:panelGrid>
+				<p:spacer height="20px" />
+
+				<h:panelGrid  columns="2" cellpadding="6">
+					<h:graphicImage library="images/recuperar" name="email.png" />
+					<p:inputText 
+						styleClass="input-login" size="45" maxlength="50"
+						required="true" requiredMessage="Digite seu Email"
+						validatorMessage="Insira um email válido." 
+						placeholder="Email"
+						value="#{recuperarContaMB.emailInfo}">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</p:inputText>
+					<h:outputLabel />
+				
+				</h:panelGrid>
+				<p:separator />
+					<p:commandButton id="enviar" value="Enviar" icon="fa fa-envelope-o" iconPos="rigth" style="display:block; float:right"
+						action="#{recuperarContaMB.chamarVerificadorEmail}" 
+						update="campo">
+					</p:commandButton>
+					
+					<p:commandButton value="Cancelar" icon="fa fa-home" iconPos="rigth"
+						immediate="true"
+						style="display:block; float:right"  action="#{redirecionarMB.cancelarRedecuperacao}"  >
+					</p:commandButton>
+				<p:spacer height="40px" />
+				
+				<p:blockUI block="campo" trigger="enviar" style="backgroud-color: red;" animate="true">
+				Enviando...<br/>
+				<p:graphicImage name="/images/ajax-loading-bar.gif"></p:graphicImage>
+				</p:blockUI>
+				
+			</p:fieldset>
+			
+			
+		</h:form>
+	</ui:define>
+	
+	
+	<ui:define name="footer">
+		<ui:include src="/includes/rodape.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>
+</html>

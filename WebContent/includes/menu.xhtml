@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+
+	<h:form>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton id="dynaButton" value="MENU" type="button"
+					icon="fa fa-bars" />
+				<p:menu overlay="true" trigger="dynaButton" my="left top"
+					at="left bottom">
+					
+					<p:submenu label="Cadastrar">
+						<p:menuitem value="Categoria" actionListener="#{menuView.update}"
+							 icon="fa fa-save" />
+						<p:menuitem value="Palestrante" actionListener="#{menuView.save}"
+							 icon="fa fa-save" />
+						<p:menuitem value="Atividade" icon="fa fa-save" />
+						<p:menuitem value="Congresso" icon="fa fa-save" outcome="evento" />
+					</p:submenu>
+					
+					<p:submenu label="Consultar">
+						<p:menuitem value="Participantes"
+							actionListener="#{menuView.delete}" 
+							ajax="false" icon="fa fa-users" />
+					</p:submenu>
+					
+					<p:submenu label="Home">
+						<p:menuitem value="Sair" action="#{redirecionarMB.chamarDeslogar}"
+							immediate="true" icon="fa fa-home" />
+					</p:submenu>
+				</p:menu>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</ui:composition>
+</html>

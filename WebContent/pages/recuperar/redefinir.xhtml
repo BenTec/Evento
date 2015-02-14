@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<ui:composition template="/template/public.xhtml">
+
+	<ui:define name="content">
+
+
+		<h:form id="codigoverificador">
+			<p:fieldset id="campo" styleClass="field">
+
+				<p:messages closable="true" autoUpdate="true">
+					<p:effect event="load" type="pulsate" delay="200"></p:effect>
+				</p:messages>
+
+
+				<h2>Defina uma nova senha</h2>
+				<p:separator />
+
+				<p>Uma senha forte tem uma combinação de letras e numeros. A
+					senha dever ter no mínimo 8 caracteres.</p>
+
+
+				<h:panelGrid columns="2" cellpadding="6">
+
+					<p:graphicImage for="r-pass" library="images/recuperar"
+						name="key.png" />
+					<p:password id="r-pass" styleClass="input-login"
+						placeholder="Nova senha" match="r-pass-confirme" required="true"
+						requiredMessage="Por favor, insira uma  nova senha"
+						promptLabel="Minimo de oito caracteres" feedback="true"
+						weakLabel="Senha Fraca" goodLabel="Relevante" strongLabel="Forte"
+						value="#{recuperarContaMB.novaSenha}"
+						validatorMessage="Opa! Certifique que as senhas sejam iguais e com minimo 8 caracteres">
+						<f:validateLength minimum="8" />
+					</p:password>
+
+					<p:graphicImage for="r-pass-confirme" library="images/recuperar"
+						name="key.png" />
+					<p:password id="r-pass-confirme" styleClass="input-login"
+						placeholder="Confirme" required="true"
+						requiredMessage="Por favor, confirme a nova senha"
+						promptLabel="Minimo de oito caracteres" feedback="true"
+						weakLabel="Senha Fraca" goodLabel="Relevante" strongLabel="Forte"
+						value="#{recuperarContaMB.novaSenha}">
+						<f:validateLength minimum="8" />
+
+					</p:password>
+
+				</h:panelGrid>
+
+				<br></br>
+				<p:separator />
+				<h:panelGrid columns="2" style="float:right">
+					
+					<p:commandButton value="Cancelar" icon="fa fa-home" iconPos="rigth"
+						immediate="true" style="display:block; float:right"
+						action="#{redirecionarMB.cancelarRedecuperacao}">
+					</p:commandButton>
+					
+					<p:commandButton value="Confirmar" icon="fa fa-check-square-o"
+						iconPos="rigth" 
+						action="#{recuperarContaMB.chamarRedefinicaoSenha}" update="campo">
+					</p:commandButton>
+				</h:panelGrid>
+				<p:spacer height="40px" />
+
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+
+
+	<ui:define name="footer">
+		<ui:include src="/includes/rodape.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>
+
+</html>

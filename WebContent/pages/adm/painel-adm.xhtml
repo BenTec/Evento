@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:composition template="/template/painel.xhtml">
+	
+	<!-- TÍTULO DA ABA BROWSER -->
+		<ui:define name="titulo">Evento - Painel Administrativo</ui:define>
+		
+		
+		<ui:define name="menu">
+			<ui:include src="/includes/menu.xhtml"/>			
+		</ui:define>
+		
+		<ui:define name="content">
+			<div  class="calendario">
+			<h:form>
+			
+	    		<p:growl id="messages" showDetail="true" />
+	 			
+			    <h:panelGrid columnClasses="value">
+			        <h2 style="margin-top: 0">Resumo</h2>
+			        <p:schedule   id="schedule"  value="#{resumoCalendarMB.eventModel}"  resizable="false"  
+			        	widgetVar="myschedule"  draggable="true"  locale="pt"   axisFormat="HH:mm" 
+			        	initialDate="#{resumoCalendarMB.hoje}" timeFormat="HH:mm" ignoreTimezone="false">
+			        
+			        <p:ajax event="dateSelect"  listener="#{resumoCalendarMB.onDateSelect}"  update=":form-events:eventDetails" oncomplete="PF('eventos').show();" />
+            		<p:ajax event="eventSelect" listener="#{resumoCalendarMB.onEventSelect}" update=":form-events:eventDetails" oncomplete="PF('eventos').show();" />
+			        
+			        
+			        </p:schedule>
+			    </h:panelGrid>
+			    
+			 </h:form> 
+			</div>
+				
+			<p:dialog widgetVar="eventos" header="Dias do eventos" showEffect="clip" hideEffect="clip">
+        
+		        <h:form id="form-events">
+		        <h:panelGrid id="eventDetails" columns="2">
+		        
+		            <h:outputLabel for="titulo" value="Título" />
+		            <p:inputText id="titulo" size="27" value="#{resumoCalendarMB.event.title}" required="true" />
+		 
+		            <h:outputLabel for="de" value="De:" />
+		            <p:inputMask id="de" size="27" value="#{resumoCalendarMB.event.startDate}" mask="99/99/9999">
+		                <f:convertDateTime pattern="dd/MM/yyyy" />
+		            </p:inputMask>
+		 
+		            <h:outputLabel for="ate" value="Até:" />
+		            <p:inputMask id="ate" size="27" value="#{resumoCalendarMB.event.endDate}" mask="99/99/9999">
+		                <f:convertDateTime pattern="dd/MM/yyyy" />
+		            </p:inputMask>
+		 
+		 
+		            <p:commandButton  value="Fechar" oncomplete="PF('eventos').hide()" />
+		        </h:panelGrid>
+		        </h:form>
+		    </p:dialog>		
+				
+		
+			
+		</ui:define>
+		
+		
+		
+		<ui:define name="footer">
+			<ui:include src="/includes/rodape.xhtml"/>
+		</ui:define>
+		
+		
+		
+		<!-- Dilalogos -->
+		
+	</ui:composition>
+
+</html>

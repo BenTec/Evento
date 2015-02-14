@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/public.xhtml">
+	<!-- Titulo da Aba -->
+	<ui:define name="titulo">Login</ui:define>
+
+
+		<ui:define name="content">
+		<h:form id="autenticar">
+
+			<p:fieldset  styleClass="field" legend="Autenticar" toggleable="true">
+				
+				<h2>Seja Bem-vindo</h2>
+				<p:messages id="mensagem" closable="true" autoUpdate="true" />
+				
+				<p:spacer height="20px" />
+
+				<h:panelGrid columns="2" cellpadding="6">
+					<h:graphicImage url="/resources/images/login/user.png" />
+					<p:inputText styleClass="input-login" size="42" maxlength="50"
+						required="true" requiredMessage="Digite seu email"
+						validatorMessage="Insira o email cadastrado" placeholder="E-mail"
+						autocomplete="false"
+						value="#{autenticarMB.email}">
+					</p:inputText>
+
+					<h:graphicImage url="/resources/images/login/key.png" />
+
+					<p:password styleClass ="input-login" size="42" maxlength="15"
+						required="true" requiredMessage="Digite sua senha"
+						placeholder="Senha"
+						value="#{autenticarMB.senha}">
+					</p:password>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" cellpadding="6">
+					<h:graphicImage url="/resources/images/login/check.png" />
+					<p:commandButton id="save" value="Entrar" styleClass="btextende"
+						action="#{autenticarMB.solicitarAutenticacao}"  />
+				</h:panelGrid>
+				<br></br>
+				<h:panelGrid columns="1" cellpadding="10">
+					<h:commandLink immediate="true" styleClass="recuperar"  action="#{redirecionarMB.chamarRecuperarConta}" >Esqueceu sua senha?</h:commandLink>
+					<h:commandLink immediate="true" styleClass="recuperar"  >Criar uma conta</h:commandLink>
+				</h:panelGrid>
+				<p:spacer height="30px" />
+
+			</p:fieldset>
+		</h:form>
+		</ui:define>
+	
+	
+	<ui:define name="footer">
+		<ui:include src="/includes/rodape.xhtml"/>
+	</ui:define>
+	
+</ui:composition>
+</html>

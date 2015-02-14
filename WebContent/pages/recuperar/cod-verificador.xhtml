@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<ui:composition template="/template/public.xhtml">
+
+	
+	
+	<ui:define name="content">
+		
+		<h:form id="codicoverificador"  >
+		<p:remoteCommand name="nomeRemoteCommand" id="idRemoteCommand"  process="@this" autoRun="true" actionListener="#{recuperarContaMB.chamarEnviadorCodigo}" update="cod" />
+		
+			<p:fieldset id="campo" styleClass="field">
+				<p:focus for="cod">
+					
+				</p:focus>
+				<p:messages closable="true" showDetail="true" >
+					<p:effect event="load" type="pulsate" delay="200"></p:effect>
+				</p:messages>
+
+
+				<h2>Verifique seu E-mail</h2>
+
+				<p>Enviamos um e-mail com um código de confirmação de 6 dígitos.
+					Insira o código abaixo para prosseguir com a redefinição da sua
+					senha.</p>
+
+
+				<h:panelGrid columns="2" cellpadding="6">
+
+					<p:inputText id="cod" styleClass="input-alto" maxlength="6" size="7"
+						required="true" requiredMessage="Insira um código"
+						placeholder=" # # # # # #" value="#{recuperarContaMB.codigoInfo}">
+					</p:inputText>
+
+					<p:outputLabel
+						value="Enviamos um email para : #{recuperarContaMB.emailInfo}" />
+				</h:panelGrid>
+				<br></br>
+				<p:separator />
+				<h:panelGrid columns="2" cellspacing="1" style="float:right;">
+					<p:commandButton value="Cancelar" icon="fa fa-home" iconPos="rigth" process="@this"
+						immediate="true" action="#{redirecionarMB.cancelarRedecuperacao}" ajax="true" >
+					</p:commandButton>
+
+					<p:commandButton value="Continuar" icon="fa fa-arrow-right" 
+						iconPos="rigth" action="#{recuperarContaMB.chamarVerificadorCodigo}"
+						update="campo">
+					</p:commandButton>
+				</h:panelGrid>
+				<p:spacer height="40px" />
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="footer">
+		<ui:include src="/includes/rodape.xhtml" />
+	</ui:define>
+
+</ui:composition>
+
+</html>

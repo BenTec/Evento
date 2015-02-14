@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/painel.xhtml">
+	<ui:define name="titulo">Lista congresso</ui:define>
+	
+	<ui:define name="menu">
+		<ui:include src="/includes/menu.xhtml"/>
+	</ui:define>
+	
+	<ui:define name="content">
+		
+		<h2>Consulte, edite, e remova seus eventos!</h2>
+		<p:dataTable id="tabela" widgetVar="tbcongresso" var="congresso"
+			value="#{congressoMb.lista}" paginator="true" rows="5"
+			paginatorPosition="bottom" emptyMessage="Nenhum resultado encontrado"
+			selection="#{congressoBean.congresso}" rowKey="#{congresso.id}"
+			selectionMode="single">
+
+			<p:column style="width:16px" exportable="false">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column style="width:3%">
+				<f:facet name="header">
+					<p:outputLabel value="Nº"/>
+				</f:facet>
+				<p:outputLabel value="#{congresso.id}"/>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Título Congresso" />
+				</f:facet>
+				<p:outputLabel value="#{congresso.titulo}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Inicio" />
+				</f:facet>
+				<p:outputLabel value="#{congresso.dataInicio}">
+					<f:convertDateTime dateStyle="full" />
+				</p:outputLabel>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Término" />
+				</f:facet>
+				<p:outputLabel value="#{congresso.dataFim}">
+					<f:convertDateTime dateStyle="full" />
+				</p:outputLabel>
+			</p:column>
+
+			<p:column style="width:7%">
+				<f:facet name="header">
+					<p:outputLabel value="Vagas" />
+				</f:facet>
+				<p:outputLabel value="#{congresso.vagas}" />
+			</p:column>
+
+			<p:column style="width:7%">
+				<f:facet name="header">
+					<p:outputLabel value="Valor" />
+				</f:facet>
+				<p:outputLabel value="#{congresso.valor}">
+					<f:convertNumber locale="pt_BR" type="currency" />
+				</p:outputLabel>
+			</p:column>
+			
+			<p:column style="width:10%" >
+				<f:facet name="header">
+					<p:outputLabel value="Atividade" />
+				</f:facet>
+				<p:spacer width="22px"/>
+				<p:commandButton icon="fa fa-search" title="Ver todas atividades"/>
+				<p:commandButton icon="fa fa-plus"   title="Adicionar atividade"/>
+			</p:column>
+			
+
+			<p:rowExpansion>
+				<h:form>
+					<p:panel header="Informações adicionais" closable="true"
+						toggleable="true">
+						<h:panelGrid columns="2">
+							
+							<p:outputLabel value="Categoria"/>
+							<p:outputLabel value="#{congresso.categoria.nome}"/>
+							
+							<p:outputLabel value="Descricao" />
+							<p:outputLabel value="#{congresso.descricao}"
+								styleClass="capitular" />
+							
+							<p:outputLabel value="Horário inicial" />
+							<p:outputLabel value="#{congresso.horaInicio}" />
+
+							<p:outputLabel value="Horário término" />
+							<p:outputLabel value="#{congresso.horaFim}" />
+									
+							<p:outputLabel value="UF" />
+							<p:outputLabel value="#{congresso.endereco.estado}"
+								styleClass="maiuscula" />
+							
+							<p:outputLabel value="Cidade" />
+							<p:outputLabel value="#{congresso.endereco.cidade}"
+								styleClass="capitular" />
+								
+							<p:outputLabel value="Local" />
+							<p:outputLabel value="#{congresso.endereco.logradouro}"
+								styleClass="capitular" />
+
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</p:rowExpansion>
+		</p:dataTable>
+
+		<p:blockUI block="tabela" trigger="tabela">
+					CARREGANDO..<br></br>
+			<p:graphicImage library="images/gif" name="loader.gif" />
+		</p:blockUI>
+
+		<!-- Fim da listagem -->
+
+	</ui:define>
+	
+	<ui:define name="footer-fixo">
+		<ui:include src="/includes/rodape.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>
+</html>
