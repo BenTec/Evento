@@ -13,10 +13,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Atividade {
+public class Atividade extends AbstractEntity {
 
+	@Column()
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	
 	@Column(nullable = false)
 	private String tipo;
@@ -45,10 +47,10 @@ public class Atividade {
 	@Column(name="data_fim", nullable = false)@Temporal(TemporalType.DATE)
 	private Date dataFim;
 	
-	@ManyToOne() //MUITAS ATIVIDADES UM CONGRESSO PODE TER
+	@ManyToOne()
 	private Congresso congresso;
 	
-	@ManyToOne() // MUITAS ATIVIDADES UM PALESTRATE PODE MINISTRAR
+	@ManyToOne() 
 	private Palestrante palestrante;
 
 	

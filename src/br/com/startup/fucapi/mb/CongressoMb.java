@@ -1,6 +1,5 @@
 package br.com.startup.fucapi.mb;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,15 +21,14 @@ import br.com.startup.fucapi.util.Mensagem;
 
 @ManagedBean
 @ViewScoped
-public class CongressoMb implements Serializable{
+public class CongressoMb {
 	
 	
-
-	private static final long serialVersionUID = 1L;
-	
+	//private static final long serialVersionUID = -2476818163809625859L;
 	private List<Congresso> lista;
 	private List<CategoriaCongresso> listCategoria;
 	private Congresso congresso;
+	private Congresso congressoSelecionado;
 	private CongressoService service;
 	private CategoriaService cservice;
 	private Administrador administrador;// trocar para a conta do adm que esta na sessão
@@ -42,7 +40,7 @@ public class CongressoMb implements Serializable{
 		service  = new CongressoService();
 		cservice = new CategoriaService();
 		administrador = new Administrador();
-		administrador.setId(1);
+		administrador.setId(1); // pegar da sessao quando terminaar as funcoes na tela
 		lista = service.listarCongresso(administrador);
 		listCategoria = cservice.lista();
 	}
@@ -57,12 +55,15 @@ public class CongressoMb implements Serializable{
 	
 	public void serviceEditar(){
 		service.editarCongresso(congresso);
+		Mensagem.sucesso("Editado", "Evento "+congresso.getTitulo()+" Nova atulização salva!");
 		lista = service.listarCongresso(administrador); //ATUALIZAR A LISTA DE CONGRESSO
 	}
 	
 	
 	public void serviceExcluir(){
-		service.excluirCongresso(congresso);
+		service.excluirCongresso(congresso.getId());
+		//service.excluir(congresso); // Esse também funciona :D
+		Mensagem.sucesso("Excluído", "Evento "+congresso.getTitulo());
 		lista = service.listarCongresso(administrador); 
 	}
 
@@ -129,6 +130,16 @@ public class CongressoMb implements Serializable{
 
 	public void setSkip(boolean skip) {
 		this.skip = skip;
+	}
+
+
+	public Congresso getCongressoSelecionado() {
+		return congressoSelecionado;
+	}
+
+
+	public void setCongressoSelecionado(Congresso congressoSelecionado) {
+		this.congressoSelecionado = congressoSelecionado;
 	}
 	
 	

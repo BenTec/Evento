@@ -24,6 +24,15 @@
 	height: 40px !important;;
 }
 
+
+.ui-datatable{
+	font-family: 'FontAwesome' !important;
+}
+
+.ui-menuitem-text{
+	font-family: 'FontAwesome' !important;
+}
+
 .value {
 	width: 900px;
  }

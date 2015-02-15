@@ -13,7 +13,7 @@
 	<ui:define name="menu">
 		<ui:include src="/includes/menu.xhtml" />
 	</ui:define>
-
+	
 	<ui:define name="content">
 
 		<h:form>
@@ -279,7 +279,7 @@
 						<p:commandButton value="Salvar"
 							actionListener="#{congressoMb.serviceCadastro}"
 							onclick="PF('varTab').onTabChange();" update="growl"
-							process="@this">
+							process="@this" action="table-eventos">
 						</p:commandButton>
 
 					</p:panel>

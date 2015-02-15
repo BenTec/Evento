@@ -78,8 +78,6 @@ public abstract class GenericDao<T> implements IGenericDao<T>  {
 			commit();
 		}catch(RuntimeException e){
 			e.printStackTrace();
-		}finally{
-			finaliza();
 		}
 	}
 
@@ -93,8 +91,6 @@ public abstract class GenericDao<T> implements IGenericDao<T>  {
 		}catch(RuntimeException e){
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();
-		}finally{
-			finaliza();
 		}
 	}
 

@@ -13,27 +13,30 @@
 			<f:facet name="left">
 				<p:commandButton id="dynaButton" value="MENU" type="button"
 					icon="fa fa-bars" />
-				<p:menu overlay="true" trigger="dynaButton" my="left top"
-					at="left bottom">
+				<p:menu overlay="true" trigger="dynaButton" my="left top"   toogleable="true"
+					at="left bottom"  >
 					
-					<p:submenu label="Cadastrar">
-						<p:menuitem value="Categoria" actionListener="#{menuView.update}"
+					<p:submenu  label="CADASTRE" >
+						<p:menuitem value="Categoria" 
 							 icon="fa fa-save" />
-						<p:menuitem value="Palestrante" actionListener="#{menuView.save}"
+						<p:menuitem value="Palestrante" 
 							 icon="fa fa-save" />
 						<p:menuitem value="Atividade" icon="fa fa-save" />
-						<p:menuitem value="Congresso" icon="fa fa-save" outcome="evento" />
+						<p:menuitem value="Evento" icon="fa fa-save" outcome="evento" />
 					</p:submenu>
 					
-					<p:submenu label="Consultar">
+					<p:submenu label="CONSULTE">
 						<p:menuitem value="Participantes"
 							actionListener="#{menuView.delete}" 
 							ajax="false" icon="fa fa-users" />
 					</p:submenu>
 					
-					<p:submenu label="Home">
-						<p:menuitem value="Sair" action="#{redirecionarMB.chamarDeslogar}"
-							immediate="true" icon="fa fa-home" />
+					<p:submenu label="HOME">
+						<p:menuitem value="Evento" outcome="evento" icon="fa fa-calendar"/>
+					</p:submenu>
+					<p:submenu label="INÍCIO">
+						<p:menuitem value="Logout" action="#{redirecionarMB.chamarDeslogar}"
+							immediate="true" icon="fa fa-sign-out" />
 					</p:submenu>
 				</p:menu>
 			</f:facet>

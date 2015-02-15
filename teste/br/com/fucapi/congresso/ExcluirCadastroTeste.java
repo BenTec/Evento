@@ -11,8 +11,8 @@ public class ExcluirCadastroTeste {
 	@Test
 	public void excluirCongresso(){
 		Congresso congresso = new Congresso();
-		congresso.setId(6);
+		congresso.setId(8);
 		CongressoService  service = new CongressoService();
-		service.excluirCongresso(congresso);
+		service.excluirCongresso(congresso.getId());
 	}
 }

@@ -2,6 +2,7 @@ package br.com.startup.fucapi.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,15 +13,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @NamedQuery( name = "Congresso.listaAll", query = "SELECT c  FROM Congresso c WHERE c.administrador = :codigo ")
+
 public class Congresso extends AbstractEntity {
 	
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.AUTO )
 	private Integer id;
 	
 	@Column(nullable = false)
@@ -36,6 +40,7 @@ public class Congresso extends AbstractEntity {
 	private Date dataFim;
 	
 	@Temporal(value = TemporalType.TIME) @Column(name="hora_inicio", nullable = false)
+	@OrderBy("ASC")
 	private Date  horaInicio;
 	
 	@Temporal(value = TemporalType.TIME) @Column(name="hora_fim",nullable = false)
@@ -55,6 +60,10 @@ public class Congresso extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY) // VARIOS EVENTOS PODEM ESTÁ RELACIONADOS A UMA CONTA
 	private Administrador administrador;
+	
+	
+	 @OneToMany(mappedBy="congresso",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	 private List<Atividade> atividade;
 	
 	public Integer getId() {
 		return id;
@@ -153,6 +162,14 @@ public class Congresso extends AbstractEntity {
 	
 	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
+	}
+
+	public List<Atividade> getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(List<Atividade> atividade) {
+		this.atividade = atividade;
 	}
 
 }

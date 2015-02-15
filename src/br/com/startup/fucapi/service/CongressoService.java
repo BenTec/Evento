@@ -21,10 +21,13 @@ public class CongressoService {
 		cDao.salvar(congresso);
 	}
 	
-	public void excluirCongresso(Congresso congresso){
-		cDao.excluirID(congresso.getId());
+	public void excluirCongresso(Integer id){
+		cDao.excluirID(id);
 	}
 	
+	public void excluir(Congresso congresso){
+		cDao.excluir(congresso);
+	}
 	
 	public void editarCongresso(Congresso congresso){
 		cDao.atualizar(congresso);
