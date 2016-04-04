@@ -7,5 +7,5 @@ Hy,
 1 - teste/br/com/fucapi package teste para gerar tabelas no banco de dados mysql <br/>
 2 - teste/br/com/fucapi package teste de unidade com Junit para persistencias no banco mysql<br/>
 3 - src/META-INF/percistence.xml, propriedades de configuração do  banco de dados <br/>
-4 - Webcontent - páginas desenvolvidas com  PrimeFaces, um pouco de CSS e JavaScript
-4 - Projeto configurado com jdk versão 1.8.25<br/>
+4 - Webcontent - páginas desenvolvidas com  PrimeFaces, um pouco de CSS e JavaScript <br/>
+5 - Projeto configurado com jdk versão 1.8.25<br/>
